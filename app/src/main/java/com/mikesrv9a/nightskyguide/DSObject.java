@@ -1,5 +1,6 @@
 package com.mikesrv9a.nightskyguide;
 
+import android.graphics.Matrix;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -33,8 +34,10 @@ class DSObject implements Parcelable {
     Double dsoAz;           // DSO current azimuth in sky (ddd.ddd)
     Double dsoSortAlt;      // used to sort DSOs in viewing order (setting on horizon = 0 deg)
     Double dsoOnHorizCosHA; // used to calculate rise/set times for each object
-    String dsoRiseTimeStr;
-    String dsoSetTimeStr;
+    String dsoRiseTimeStr;  // Rise Time
+    String dsoSetTimeStr;   // Set Time
+    String dsoTransitStr;   // Transit Time
+    Double dsoTransitAlt;   // Altitude at transit (max altitude)
 
 
     // DSObject constructor
@@ -104,6 +107,10 @@ class DSObject implements Parcelable {
 
     String getDsoSetTimeStr() {return dsoSetTimeStr;}
 
+    String getDsoTransitStr() {return dsoTransitStr;}
+
+    Double getDsoTransitAlt() {return dsoTransitAlt;}
+
     Integer getObjectIdSort() {
         Integer sort;
         if (dsoType.equals("PL")) {sort = Arrays.asList(AstroCalc.planetName).indexOf("dsoObjectID");}    // planets first
@@ -160,11 +167,13 @@ class DSObject implements Parcelable {
         double localST = AstroCalc.localST(greenwichST, userLong);
         double hourAngle = AstroCalc.hourAngle(localST, dsoRA);
         dsoOnHorizCosHA = AstroCalc.dsoOnHorizCosHA(dsoDec, userLat);
+        int transitOffset = (int) ((localST-dsoRA) * 86164.1/360);
         // calculate rise and set times - work in progress
         if (dsoOnHorizCosHA < -1) {
                 dsoRiseTimeStr="Circumpolar: never";
                 dsoSetTimeStr="sets below horizon";}
             else if (dsoOnHorizCosHA > 1) {
+                dsoTransitStr = "";
                 dsoRiseTimeStr="This DSO never rises";
                 dsoSetTimeStr="at this latitude";}
             else {                            // 86164.1 is number of seconds in sidereal day
@@ -174,13 +183,14 @@ class DSObject implements Parcelable {
                         Math.acos(dsoOnHorizCosHA))) * 86164.1/360);
                 if (setOffset < 0) {   // change to next day - accounts for time zone
                     riseOffset = riseOffset - 86164;
+                    transitOffset = transitOffset - 86164;
                     setOffset = setOffset + 86164;
                 }
-                dsoRiseTimeStr = dateCal.minusSeconds(riseOffset).
-                        withZone(DateTimeZone.getDefault()).toString(dtf);
-                dsoSetTimeStr = dateCal.plusSeconds(setOffset).
-                        withZone(DateTimeZone.getDefault()).toString(dtf);
+                dsoRiseTimeStr = dateCal.minusSeconds(riseOffset).withZone(DateTimeZone.getDefault()).toString(dtf);
+                dsoTransitStr = dateCal.minusSeconds(transitOffset).withZone(DateTimeZone.getDefault()).toString(dtf);
+                dsoSetTimeStr = dateCal.plusSeconds(setOffset).withZone(DateTimeZone.getDefault()).toString(dtf);
             }
+        dsoTransitAlt = AstroCalc.transitAlt(dsoDec, userLat);
         dsoAlt = AstroCalc.dsoAlt(dsoDec, userLat, hourAngle);
         dsoAz = AstroCalc.dsoAz(dsoDec, userLat, hourAngle, dsoAlt);
 
@@ -219,6 +229,8 @@ class DSObject implements Parcelable {
         parcel.writeDouble(dsoOnHorizCosHA);
         parcel.writeString(dsoRiseTimeStr);
         parcel.writeString(dsoSetTimeStr);
+        parcel.writeString(dsoTransitStr);
+        parcel.writeDouble(dsoTransitAlt);
     }
 
     // required method, not used
@@ -235,6 +247,7 @@ class DSObject implements Parcelable {
         dsoCatalogue = in.readString();
         dsoRiseTimeStr = in.readString();
         dsoSetTimeStr = in.readString();
+        dsoTransitStr = in.readString();
     }
 
     // required method, not used

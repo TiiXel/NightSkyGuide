@@ -11,6 +11,8 @@ package com.mikesrv9a.nightskyguide;
 // Additional info at http://www.stargazing.net/kepler/altaz.html
 
 
+import android.graphics.Matrix;
+
 public class AstroCalc {
 
     // these values are from Table 8: Elements of the planetary orbits at epoch 2010.0 (page 123)
@@ -176,6 +178,10 @@ public class AstroCalc {
         if
             (ha < 0)  {ha = ha + 360;}
         return ha;
+    }
+
+    public static double transitAlt(double dec, double lat) {
+        return (90 - Math.abs(lat-dec));
     }
 
     // return Altitude of object

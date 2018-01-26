@@ -41,6 +41,8 @@
     <string name="label_alt">Altitude:</string>
     <string name="label_az">Azimuth:</string>
     <string name="label_rise">Rise Time:</string>
+    <string name="label_transit">Transit Time:</string>
+    <string name="label_transit_alt">Transit Altitude:</string>
     <string name="label_set">Set Time:</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_app_info">AppInfoActivity</string>

@@ -87,6 +87,8 @@ public class DetailFragment extends Fragment {
         TextView altTextView = view.findViewById(R.id.altTextView);
         TextView azTextView = view.findViewById(R.id.azTextView);
         TextView riseTextView = view.findViewById(R.id.riseTextView);
+        TextView transitTextView = view.findViewById(R.id.transitTextView);
+        TextView transitAltTextView = view.findViewById(R.id.transitAltTextView);
         TextView setTextView = view.findViewById(R.id.setTextView);
 
 
@@ -116,6 +118,9 @@ public class DetailFragment extends Fragment {
         String azimuth = df.format(dsObject.getDsoAz()) + "°";
         azTextView.setText(azimuth);
         riseTextView.setText(dsObject.getDsoRiseTimeStr());
+        transitTextView.setText(dsObject.getDsoTransitStr());
+        String transitAlt = df.format(dsObject.dsoTransitAlt) + "°";
+        transitAltTextView.setText(transitAlt);
         setTextView.setText(dsObject.getDsoSetTimeStr());
 
         // display constellation image

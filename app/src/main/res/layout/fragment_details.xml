@@ -39,7 +39,7 @@
 
         </RelativeLayout>
 
-        <!-- Section 2 -->
+        <!-- Section 2 - DSO General Info -->
         <LinearLayout
             android:id="@+id/Section2"
             android:layout_width="match_parent"
@@ -184,9 +184,9 @@
 
         </LinearLayout>
 
-        <!-- Divider line -->
+        <!-- Section 2 & 2.5 Divider line -->
         <TextView
-            android:id="@+id/line"
+            android:id="@+id/line25"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -196,13 +196,110 @@
             android:paddingBottom="12dp"
             android:paddingTop="12dp" />
 
-        <!-- Section 3 -->
+        <!-- Section 2.5 - Rise/Transit/Set Time Info -->
+            <LinearLayout
+                android:id="@+id/Section25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/line25">
+
+                <RelativeLayout
+                    android:id="@+id/Section25L"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.45">
+
+                    <TextView
+                        android:id="@+id/riseLabelTextView"
+                        style="@style/DSObjectLabelTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_rise" />
+
+                    <TextView
+                        android:id="@+id/transitLabelTextView"
+                        style="@style/DSObjectLabelTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/riseLabelTextView"
+                        android:text="@string/label_transit"/>
+
+                    <TextView
+                        android:id="@+id/transitAltLabelTextView"
+                        style="@style/DSObjectLabelTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/transitLabelTextView"
+                        android:text="@string/label_transit_alt"/>
+
+                    <TextView
+                        android:id="@+id/setLabelTextView"
+                        style="@style/DSObjectLabelTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/transitAltLabelTextView"
+                        android:paddingBottom="12dp"
+                        android:text="@string/label_set" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Section25R"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.55">
+
+                    <TextView
+                        android:id="@+id/riseTextView"
+                        style="@style/DSObjectTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/transitTextView"
+                        style="@style/DSObjectTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/riseTextView"/>
+
+                    <TextView
+                        android:id="@+id/transitAltTextView"
+                        style="@style/DSObjectTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/transitTextView"/>
+
+                    <TextView
+                        android:id="@+id/setTextView"
+                        style="@style/DSObjectTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/transitAltTextView" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        <!-- Section 2.5 & 3 Divider line -->
+        <TextView
+            android:id="@+id/line3"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/Section25"
+            android:background="@android:color/darker_gray"
+            android:gravity="bottom"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp" />
+
+        <!-- Section 3 - Equatorial & Horizon Coordinate Info -->
         <LinearLayout
             android:id="@+id/Section3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@id/line">
+            android:layout_below="@id/line3">
 
             <RelativeLayout
                 android:id="@+id/Section3L"
@@ -226,27 +323,11 @@
                     android:text="@string/label_dec" />
 
                 <TextView
-                    android:id="@+id/riseLabelTextView"
-                    style="@style/DSObjectLabelTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/decLabelTextView"
-                    android:text="@string/label_rise" />
-
-                <TextView
-                    android:id="@+id/setLabelTextView"
-                    style="@style/DSObjectLabelTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/riseLabelTextView"
-                    android:text="@string/label_set" />
-
-                <TextView
                     android:id="@+id/altLabelTextView"
                     style="@style/DSObjectLabelTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/setLabelTextView"
+                    android:layout_below="@id/decLabelTextView"
                     android:text="@string/label_alt" />
 
                 <TextView
@@ -280,25 +361,11 @@
                     android:layout_below="@id/raTextView" />
 
                 <TextView
-                    android:id="@+id/riseTextView"
-                    style="@style/DSObjectTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/decTextView"/>
-
-                <TextView
-                    android:id="@+id/setTextView"
-                    style="@style/DSObjectTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/riseTextView" />
-
-                <TextView
                     android:id="@+id/altTextView"
                     style="@style/DSObjectTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/setTextView" />
+                    android:layout_below="@id/decTextView" />
 
                 <TextView
                     android:id="@+id/azTextView"
@@ -311,24 +378,25 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/line2"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/Section3"
-            android:background="@android:color/darker_gray"
-            android:gravity="bottom"
-            android:paddingBottom="12dp"
-            android:paddingTop="12dp" />
+    <!-- Section 3 & 4 Divider Line -->
+    <TextView
+        android:id="@+id/line4"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/Section3"
+        android:background="@android:color/darker_gray"
+        android:gravity="bottom"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp" />
 
-    <!-- Section 4 -->
+    <!-- Section 4 - Constellation -->
     <LinearLayout
         android:id="@+id/Section4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/line2">
+        android:layout_below="@id/line4">
 
         <RelativeLayout
             android:id="@+id/Section4L"
