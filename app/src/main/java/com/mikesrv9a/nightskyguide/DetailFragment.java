@@ -34,8 +34,6 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import static com.mikesrv9a.nightskyguide.PreferencesHelper.*;
-
 public class DetailFragment extends Fragment {
 
     private DSObject dsObject;  // dsObject to display
@@ -119,7 +117,7 @@ public class DetailFragment extends Fragment {
         raTextView.setText(AstroCalc.convertDDToHMS(dsObject.getDsoRA()));
         decTextView.setText(AstroCalc.convertDDToDMS(dsObject.getDsoDec()));
         String constAbbr = dsObject.getDsoConst();
-        constTextView.setText(AstroCalc.getConstName(constAbbr));
+        constTextView.setText(getResources().getString(getResources().getIdentifier("constellation_name_"+constAbbr, "string", getActivity().getPackageName())));
         nameTextView.setText(dsObject.getDsoName());
         psaTextView.setText(dsObject.getDsoPSA());
         oithTextView.setText(dsObject.getDsoOITH());
@@ -226,7 +224,7 @@ public class DetailFragment extends Fragment {
     public void setUserPreferences() {
         Context context = getActivity();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        Set<String> showAtlasLists = preferences.getStringSet(PREF_MULTI_PREF_ATLAS_LIST, null);
+        Set<String> showAtlasLists = preferences.getStringSet("multi_pref_atlas_list", null);
         if(showAtlasLists ==null){
             String[] defaultList = {"P","O","S"};
             showAtlasLists = new HashSet<>(Arrays.asList(defaultList));

@@ -238,29 +238,6 @@ public class AstroCalc {
                 String.format("%02d",sec) + "s";
     }
 
-    public static String getConstName (String abbr) {
-        String[] constAbbrs = {"AND","ANT","APS","AQL","AQR","ARA","ARI","AUR","BOO","CAE","CAM","CAP","CAR","CAS","CEN","CEP","CET","CHA","CIR",
-                "CMA","CMI","CNC","COL","COM","CRA","CRB","CRT","CRU","CRV","CVN","CYG","DEL","DOR","DRA","EQU","ERI","FOR","GEM","GRU","HER",
-                "HOR","HYA","HYI","IND","LAC","LEO","LEP","LIB","LMI","LUP","LYN","LYR","MEN","MIC","MON","MUS","NOR","OCT","OPH","ORI","PAV",
-                "PEG","PER","PHE","PIC","PSA","PSC","PUP","PYX","RET","SCL","SCO","SCT","SER","SEX","SGE","SGR","TAU","TEL","TRA","TRI","TUC",
-                "UMA","UMI","VEL","VIR","VOL","VUL"};
-        String[] constNames = {"Andromeda","Antlia","Apus","Aquila","Aquarius","Ara","Aries","Auriga","Boötes","Caelum","Camelopardalis","Capricornus",
-                "Carina","Cassiopeia","Centaurus","Cepheus","Cetus","Chamaeleon","Circinus","Canis Major","Canis Minor","Cancer","Columba","Coma Berenices",
-                "Corona Austrina","Corona Borealis","Crater","Crux","Corvus","Canes Venatici","Cygnus","Delphinus","Dorado","Draco","Equuleus","Eridanus",
-                "Fornax","Gemini","Grus","Hercules","Horologium","Hydra","Hydrus","Indus","Lacerta","Leo","Lepus","Libra","Leo Minor","Lupus","Lynx",
-                "Lyra","Mensa","Microscopium","Monoceros","Musca","Norma","Octans","Ophiuchus","Orion","Pavo","Pegasus","Perseus","Phoenix","Pictor",
-                "Piscis Austrinus","Pisces","Puppis","Pyxis","Reticulum","Sculptor","Scorpius","Scutum","Serpens","Sextans","Sagitta","Sagittarius",
-                "Taurus","Telescopium","Triangulum Australe","Triangulum","Tucana","Ursa Major","Ursa Minor","Vela","Virgo","Volans","Vulpecula"};
-        String constName = "";
-        for (int i=0; i<constAbbrs.length;i++) {
-            if(constAbbrs[i].equals(abbr)) {
-                constName = constNames[i];
-                break;
-            }
-        }
-        return constName;
-    }
-
     // determine which constellation a planet is currently in
     public static String planetConst(double raP, double decP) {
         if ((constIntersect(0,22,raP,decP) & 1) == 1) {return "AQR";}
