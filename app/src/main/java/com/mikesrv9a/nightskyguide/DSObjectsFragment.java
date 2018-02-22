@@ -165,19 +165,19 @@ public class DSObjectsFragment extends Fragment {
         //  creates DSObject objects and adds to dsObjectArrayList
         if (data != null && data.getCount() > 0) {
             data.moveToFirst();
-            int objectIdCol = data.getColumnIndex("object");
-            int typeCol = data.getColumnIndex("type");
-            int magCol = data.getColumnIndex("mag");
-            int sizeCol = data.getColumnIndex("size");
-            int distCol = data.getColumnIndex("distance");
-            int raCol = data.getColumnIndex("ra");
-            int decCol = data.getColumnIndex("dec");
-            int constCol = data.getColumnIndex("const");
-            int nameCol = data.getColumnIndex("name");
-            int psaCol = data.getColumnIndex("psa");
-            int oithCol = data.getColumnIndex("oith");
-            int skyatlasCol = data.getColumnIndex("skyatlas");
-            int catCol = data.getColumnIndex("catalogue");
+            int objectIdCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_OBJECT);
+            int typeCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_TYPE);
+            int magCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_MAGNITUDE);
+            int sizeCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_SIZE);
+            int distCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_DISTANCE);
+            int raCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_RA);
+            int decCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_DEC);
+            int constCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_CONSTELLATION);
+            int nameCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_NAME);
+            int psaCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_PSA);
+            int oithCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_OITH);
+            int skyatlasCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_SKYATLAS);
+            int catCol = data.getColumnIndex(DSObjectDatabaseHelper.KEY_CATALOGUE);
             setUserPreferences();  // need user's latitude and longitude
             while (!data.isAfterLast()) {
                 String dsoObjectID = data.getString(objectIdCol);

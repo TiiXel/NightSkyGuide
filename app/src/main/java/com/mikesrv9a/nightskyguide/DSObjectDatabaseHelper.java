@@ -13,6 +13,21 @@ public class DSObjectDatabaseHelper extends SQLiteAssetHelper{
     private static final String DATABASE_NAME = "DSObjects.db";
     private static final int DATABASE_VERSION = 4;
 
+    public static String KEY_ID = "_id";
+    public static String KEY_OBJECT = "object";
+    public static String KEY_TYPE = "type";
+    public static String KEY_MAGNITUDE = "mag";
+    public static String KEY_SIZE = "size";
+    public static String KEY_DISTANCE = "distance";
+    public static String KEY_RA = "ra";
+    public static String KEY_DEC = "dec";
+    public static String KEY_CONSTELLATION = "const";
+    public static String KEY_NAME = "name";
+    public static String KEY_PSA = "psa";
+    public static String KEY_OITH = "oith";
+    public static String KEY_CATALOGUE = "catalogue";
+    public static String KEY_SKYATLAS = "skyatlas";
+
     // constructor
     public DSObjectDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,20 +39,20 @@ public class DSObjectDatabaseHelper extends SQLiteAssetHelper{
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
         String [] sqlSelect = {
-                "_id",
-                "object",
-                "type",
-                "mag",
-                "size",
-                "distance",
-                "ra",
-                "dec",
-                "const",
-                "name",
-                "psa",
-                "oith",
-                "catalogue",
-                "skyatlas"
+                KEY_ID,
+                KEY_OBJECT,
+                KEY_TYPE,
+                KEY_MAGNITUDE,
+                KEY_MAGNITUDE,
+                KEY_DISTANCE,
+                KEY_RA,
+                KEY_DEC,
+                KEY_CONSTELLATION,
+                KEY_NAME,
+                KEY_PSA,
+                KEY_OITH,
+                KEY_CATALOGUE,
+                KEY_SKYATLAS
         };
         String sqlTables = "dsObjects";
 
