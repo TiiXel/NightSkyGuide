@@ -43,7 +43,7 @@ public class DSObjectDatabaseHelper extends SQLiteAssetHelper{
                 KEY_OBJECT,
                 KEY_TYPE,
                 KEY_MAGNITUDE,
-                KEY_MAGNITUDE,
+                KEY_SIZE,
                 KEY_DISTANCE,
                 KEY_RA,
                 KEY_DEC,
