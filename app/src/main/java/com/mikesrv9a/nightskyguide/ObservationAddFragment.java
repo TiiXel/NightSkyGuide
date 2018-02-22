@@ -34,6 +34,8 @@ import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import static com.mikesrv9a.nightskyguide.PreferencesHelper.*;
+
 
 public class ObservationAddFragment extends Fragment  {
 
@@ -121,17 +123,17 @@ public class ObservationAddFragment extends Fragment  {
         timeTextInputLayout.getEditText().setText(currentTime);
         String location = getLocation();
         locationTextInputLayout.getEditText().setText(location);
-        String seeing = preferences.getString("last_seeing", "");
+        String seeing = preferences.getString(PREF_OBS_LAST_SEEING, "");
         seeingTextInputLayout.getEditText().setText(seeing);
-        String transparency = preferences.getString("last_transparency", "");
+        String transparency = preferences.getString(PREF_OBS_LAST_TRANSPARENCY, "");
         transparencyTextInputLayout.getEditText().setText(transparency);
-        String telescope = preferences.getString("last_telescope", "");
+        String telescope = preferences.getString(PREF_OBS_LAST_TELESCOPE, "");
         telescopeTextInputLayout.getEditText().setText(telescope);
-        String eyepiece = preferences.getString("last_eyepiece", "");
+        String eyepiece = preferences.getString(PREF_OBS_LAST_EYEPIECE, "");
         eyepieceTextInputLayout.getEditText().setText(eyepiece);
-        String power = preferences.getString("last_power", "");
+        String power = preferences.getString(PREF_OBS_LAST_POWER, "");
         powerTextInputLayout.getEditText().setText(power);
-        String filter = preferences.getString("last_filter", "");
+        String filter = preferences.getString(PREF_OBS_LAST_FILTER, "");
         filterTextInputLayout.getEditText().setText(filter);
 
         dateEditText.setOnClickListener(dateClicked);
@@ -199,25 +201,25 @@ public class ObservationAddFragment extends Fragment  {
         Toast.makeText(context, "Observation Saved", Toast.LENGTH_LONG).show();
         listener.onObservationSaved();
         SharedPreferences.Editor edit = preferences.edit();
-        edit.putString("last_seeing", seeingTextInputLayout.getEditText().getText().toString());
-        edit.putString("last_transparency", transparencyTextInputLayout.getEditText().getText().toString());
-        edit.putString("last_telescope", telescopeTextInputLayout.getEditText().getText().toString());
-        edit.putString("last_eyepiece", eyepieceTextInputLayout.getEditText().getText().toString());
-        edit.putString("last_power", powerTextInputLayout.getEditText().getText().toString());
-        edit.putString("last_filter", filterTextInputLayout.getEditText().getText().toString());
+        edit.putString(PREF_OBS_LAST_SEEING, seeingTextInputLayout.getEditText().getText().toString());
+        edit.putString(PREF_OBS_LAST_TRANSPARENCY, transparencyTextInputLayout.getEditText().getText().toString());
+        edit.putString(PREF_OBS_LAST_TELESCOPE, telescopeTextInputLayout.getEditText().getText().toString());
+        edit.putString(PREF_OBS_LAST_EYEPIECE, eyepieceTextInputLayout.getEditText().getText().toString());
+        edit.putString(PREF_OBS_LAST_POWER, powerTextInputLayout.getEditText().getText().toString());
+        edit.putString(PREF_OBS_LAST_FILTER, filterTextInputLayout.getEditText().getText().toString());
         edit.apply();
     }
 
     public String getLocation() {
         String location = "";
-        if (preferences.getBoolean("use_device_location",false)) {
-            Double gpsLat = Double.parseDouble(preferences.getString("last_gps_lat", getString(R.string.default_latitude)));
-            Double gpsLong = Double.parseDouble(preferences.getString("last_gps_long", getString(R.string.default_longitude)));
+        if (preferences.getBoolean(PREF_USE_DEVICE_LOCATION,false)) {
+            Double gpsLat = Double.parseDouble(preferences.getString(PREF_LOCATION_LAST_GPS_LAT, getString(R.string.default_latitude)));
+            Double gpsLong = Double.parseDouble(preferences.getString(PREF_LOCATION_LAST_GPS_LON, getString(R.string.default_longitude)));
             location = AstroCalc.convertLatToDMS(gpsLat) + " ,  " + AstroCalc.convertLongToDMS(gpsLong);
             // location = "Latitude:  " + df.format(gpsLat) + "   /   Longitude:  " + df.format(gpsLong);
             }
         else {
-            String locationNum = preferences.getString("viewing_location", "1");
+            String locationNum = preferences.getString(PREF_VIEWING_LOCATION, "1");
             switch (locationNum) {
                 case "2":
                     location = preferences.getString("pref_location2", "");

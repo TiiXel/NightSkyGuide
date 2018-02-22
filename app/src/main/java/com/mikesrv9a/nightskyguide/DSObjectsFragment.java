@@ -27,6 +27,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Set;
 
+import static com.mikesrv9a.nightskyguide.PreferencesHelper.*;
+
 public class DSObjectsFragment extends Fragment {
 
 
@@ -276,18 +278,18 @@ public class DSObjectsFragment extends Fragment {
     public void setUserPreferences() {
         Context context = getActivity();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        if (preferences.getBoolean("use_device_location", false)) {
-            userLat = Double.parseDouble(preferences.getString("last_gps_lat", getString(R.string.default_latitude)));
-            userLong = Double.parseDouble(preferences.getString("last_gps_long", getString(R.string.default_longitude)));}
+        if (preferences.getBoolean(PREF_USE_DEVICE_LOCATION, false)) {
+            userLat = Double.parseDouble(preferences.getString(PREF_LOCATION_LAST_GPS_LAT, getString(R.string.default_latitude)));
+            userLong = Double.parseDouble(preferences.getString(PREF_LOCATION_LAST_GPS_LON, getString(R.string.default_longitude)));}
         else {
-            userLat = Double.parseDouble(preferences.getString("edit_text_pref_lat", getString(R.string.default_latitude)));
-            userLong = Double.parseDouble(preferences.getString("edit_text_pref_long", getString(R.string.default_longitude)));}
+            userLat = Double.parseDouble(preferences.getString(PREF_LOCATION_LAT, getString(R.string.default_latitude)));
+            userLong = Double.parseDouble(preferences.getString(PREF_LOCATION_LON, getString(R.string.default_longitude)));}
         //Toast.makeText(getContext(), userLat + " / " + userLong, Toast.LENGTH_LONG).show();
-        showObserved = preferences.getBoolean("pref_show_observed", false);
-        showBelowHoriz = preferences.getBoolean("pref_show_below_horiz", false);
-        maxMagnitude = Integer.valueOf(preferences.getString("pref_max_magnitude", "255"));
-        sortPreference = preferences.getString("pref_sort_by", "1");
-        showObjectLists = preferences.getStringSet("multi_pref_object_list", null);
+        showObserved = preferences.getBoolean(PREF_SHOW_OBSERVED, false);
+        showBelowHoriz = preferences.getBoolean(PREF_SHOW_BELOW_HORIZON, false);
+        maxMagnitude = Integer.valueOf(preferences.getString(PREF_MAX_MAGNITUDE, "255"));
+        sortPreference = preferences.getString(PREF_SORT_BY, "1");
+        showObjectLists = preferences.getStringSet(PREF_MULTI_PREF_OBJECT_LIST, null);
         String selected = null;
         if (showObjectLists != null) {    // should never be null, included to prevent error flagging
             selected = showObjectLists.toString();

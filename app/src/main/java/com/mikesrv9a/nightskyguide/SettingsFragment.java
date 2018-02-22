@@ -22,6 +22,8 @@ import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
 import java.util.Locale;
 
+import static com.mikesrv9a.nightskyguide.PreferencesHelper.*;
+
 public class SettingsFragment extends PreferenceFragment {
 
     // Viewing Location:
@@ -103,17 +105,17 @@ public class SettingsFragment extends PreferenceFragment {
         longEditText5 = (EditTextPreference) findPreference("pref_long5");
 
         // Viewing Location:
-        useDeviceLocation = (SwitchPreference) findPreference("use_device_location");
-        viewingLocation = (ListPreference) findPreference("viewing_location");
+        useDeviceLocation = (SwitchPreference) findPreference(PREF_USE_DEVICE_LOCATION);
+        viewingLocation = (ListPreference) findPreference(PREF_VIEWING_LOCATION);
 
         // Display Options:
-        displayPrevObserved = (SwitchPreference) findPreference("pref_show_observed");  // Pref:  display previously observed
-        displayBelowHoriz = (SwitchPreference) findPreference("pref_show_below_horiz");  // Pref:  display objects below horizon
-        maxMagnitude = (ListPreference) findPreference("pref_max_magnitude");  // Pref:  filter out objects of magnitude above <max>
-        sortByPref = (ListPreference) findPreference("pref_sort_by");  // Pref:  sort list of objects by <list>
-        displayObjectList = (MultiSelectListPreference) findPreference("multi_pref_object_list");   // Pref:  select object lists to display
+        displayPrevObserved = (SwitchPreference) findPreference(PREF_SHOW_OBSERVED);  // Pref:  display previously observed
+        displayBelowHoriz = (SwitchPreference) findPreference(PREF_SHOW_BELOW_HORIZON);  // Pref:  display objects below horizon
+        maxMagnitude = (ListPreference) findPreference(PREF_MAX_MAGNITUDE);  // Pref:  filter out objects of magnitude above <max>
+        sortByPref = (ListPreference) findPreference(PREF_SORT_BY);  // Pref:  sort list of objects by <list>
+        displayObjectList = (MultiSelectListPreference) findPreference(PREF_MULTI_PREF_OBJECT_LIST);   // Pref:  select object lists to display
         displayObjectList.setSummary(updateObjectList(displayObjectList.getValues().toString()));
-        displayAtlasList = (MultiSelectListPreference) findPreference("multi_pref_atlas_list");  // Pref:  select atlas lists to display
+        displayAtlasList = (MultiSelectListPreference) findPreference(PREF_MULTI_PREF_ATLAS_LIST);  // Pref:  select atlas lists to display
         displayAtlasList.setSummary(updateAtlasList(displayAtlasList.getValues().toString()));
         //displayConstList = (MultiSelectListPreference) findPreference("multi_pref_const_month");
         //Log.i("Start: ", displayConstList.getValues().toString());
@@ -389,8 +391,8 @@ public class SettingsFragment extends PreferenceFragment {
         SharedPreferences pref;
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor edit = pref.edit();
-        edit.putString("edit_text_pref_lat", locLat);
-        edit.putString("edit_text_pref_long", locLong);
+        edit.putString(PREF_LOCATION_LAT, locLat);
+        edit.putString(PREF_LOCATION_LON, locLong);
         edit.apply();
     }
 
@@ -398,8 +400,8 @@ public class SettingsFragment extends PreferenceFragment {
     public void setLocSummary() {
         if (((SettingsActivity) getActivity()).useGPS) {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            Double gpsLat = Double.parseDouble(preferences.getString("last_gps_lat", getString(R.string.default_latitude)));
-            Double gpsLong = Double.parseDouble(preferences.getString("last_gps_long", getString(R.string.default_longitude)));
+            Double gpsLat = Double.parseDouble(preferences.getString(PREF_LOCATION_LAST_GPS_LAT, getString(R.string.default_latitude)));
+            Double gpsLong = Double.parseDouble(preferences.getString(PREF_LOCATION_LAST_GPS_LON, getString(R.string.default_longitude)));
             viewingLocation.setSummary("Latitude:  " + df.format(gpsLat) + "   /   Longitude:  " + df.format(gpsLong));
             useDeviceLocation.setSummary("Yes");
             viewingLocation.setEnabled(false);

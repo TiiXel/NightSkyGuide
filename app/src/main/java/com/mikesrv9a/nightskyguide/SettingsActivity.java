@@ -33,6 +33,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import static com.mikesrv9a.nightskyguide.PreferencesHelper.*;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private FusedLocationProviderClient mFusedLocationClient;
@@ -60,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         // start location services, including permissions checks, etc.
         context = this;
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        useGPS = preferences.getBoolean("use_device_location", false);
+        useGPS = preferences.getBoolean(PREF_USE_DEVICE_LOCATION, false);
         locUpdates = false;
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         mSettingsClient = LocationServices.getSettingsClient(context);
@@ -133,7 +135,7 @@ public class SettingsActivity extends AppCompatActivity {
                     // permission denied -
                     useGPS = false;
                     SharedPreferences.Editor edit = preferences.edit();
-                    edit.putBoolean("use_device_location", false);
+                    edit.putBoolean(PREF_USE_DEVICE_LOCATION, false);
                     edit.apply();
                     settingsFragment.useDeviceLocation.setChecked(false);
                     settingsFragment.setLocSummary();
@@ -174,7 +176,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Toast.makeText(context, "Location Services Unavailable", Toast.LENGTH_LONG).show();
                                 useGPS = false;
                                 SharedPreferences.Editor edit = preferences.edit();
-                                edit.putBoolean("use_device_location", false);
+                                edit.putBoolean(PREF_USE_DEVICE_LOCATION, false);
                                 edit.apply();
                                 settingsFragment.useDeviceLocation.setChecked(false);
                                 settingsFragment.setLocSummary();
@@ -209,7 +211,7 @@ public class SettingsActivity extends AppCompatActivity {
                         // user does not want to update setting. Handle it in a way that it will to affect your app functionality
                         useGPS = false;
                         SharedPreferences.Editor edit = preferences.edit();
-                        edit.putBoolean("use_device_location", false);
+                        edit.putBoolean(PREF_USE_DEVICE_LOCATION, false);
                         edit.apply();
                         settingsFragment.useDeviceLocation.setChecked(false);
                         settingsFragment.setLocSummary();
@@ -245,8 +247,8 @@ public class SettingsActivity extends AppCompatActivity {
         double lastLat = location.getLatitude();
         double lastLong = location.getLongitude();
         SharedPreferences.Editor edit = preferences.edit();
-        edit.putString("last_gps_lat", String.valueOf(lastLat));
-        edit.putString("last_gps_long", String.valueOf(lastLong));
+        edit.putString(PREF_LOCATION_LAST_GPS_LAT, String.valueOf(lastLat));
+        edit.putString(PREF_LOCATION_LAST_GPS_LON, String.valueOf(lastLong));
         edit.apply();
         settingsFragment.setLocSummary();
     }

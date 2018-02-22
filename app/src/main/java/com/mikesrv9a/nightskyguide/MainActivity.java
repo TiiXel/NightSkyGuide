@@ -35,6 +35,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import static com.mikesrv9a.nightskyguide.PreferencesHelper.*;
+
 public class MainActivity extends AppCompatActivity
     implements DSObjectsFragment.DSObjectsFragmentListener, DetailFragment.AddObservationListener, ObservationAddFragment.SaveCompletedListener {
 
@@ -201,7 +203,7 @@ public class MainActivity extends AppCompatActivity
                     // permission denied
                     useGPS = false;
                     SharedPreferences.Editor edit = preferences.edit();
-                    edit.putBoolean("use_device_location", false);
+                    edit.putBoolean(PREF_USE_DEVICE_LOCATION, false);
                     edit.apply();
                 }
             }
@@ -240,7 +242,7 @@ public class MainActivity extends AppCompatActivity
                                 Toast.makeText(MainActivity.this, "Location Services Unavailable", Toast.LENGTH_LONG).show();
                                 useGPS = false;
                                 SharedPreferences.Editor edit = preferences.edit();
-                                edit.putBoolean("use_device_location", false);
+                                edit.putBoolean(PREF_USE_DEVICE_LOCATION, false);
                                 edit.apply();
                                 break;
                         }
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity
                         // user does not want to update setting.
                         useGPS = false;
                         SharedPreferences.Editor edit = preferences.edit();
-                        edit.putBoolean("use_device_location", false);
+                        edit.putBoolean(PREF_USE_DEVICE_LOCATION, false);
                         edit.apply();
                         break;
                 }
@@ -305,8 +307,8 @@ public class MainActivity extends AppCompatActivity
         double lastLat = location.getLatitude();
         double lastLong = location.getLongitude();
         SharedPreferences.Editor edit = preferences.edit();
-        edit.putString("last_gps_lat", String.valueOf(lastLat));
-        edit.putString("last_gps_long", String.valueOf(lastLong));
+        edit.putString(PREF_LOCATION_LAST_GPS_LAT, String.valueOf(lastLat));
+        edit.putString(PREF_LOCATION_LAST_GPS_LON, String.valueOf(lastLong));
         edit.apply();
     }
 
