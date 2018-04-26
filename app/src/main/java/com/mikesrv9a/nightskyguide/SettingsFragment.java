@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.*;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.*;
 import android.widget.Toast;
 
@@ -20,7 +21,7 @@ public class SettingsFragment extends PreferenceFragment {
     ListPreference viewingLocation;  //  Preference "viewing_location"  (if not GPS/Network)
     String[] viewLocItem;  // Array for viewingLocation ListPreference
     String[] viewLocList;  // Array for viewingLocation ListPreference
-    //SwitchPreference nightMode;  // Preference "night_mode"
+    SwitchPreference nightMode;  // Preference "night_mode"
 
     // locationParent > Edit Locations:
     PreferenceScreen updateLocParent;  // Parent to Update Locations
@@ -97,7 +98,7 @@ public class SettingsFragment extends PreferenceFragment {
         // Viewing Location:
         useDeviceLocation = (SwitchPreference) findPreference("use_device_location");
         viewingLocation = (ListPreference) findPreference("viewing_location");
-        //nightMode = (SwitchPreference) findPreference("night_mode");
+        nightMode = (SwitchPreference) findPreference("night_mode");
 
         // Display Options:
         displayPrevObserved = (SwitchPreference) findPreference("pref_show_observed");  // Pref:  display previously observed
@@ -144,20 +145,18 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        /* Night mode work in progress
         nightMode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                Boolean newNightMode = (Boolean) newValue;
-                if (newNightMode) {      // user turning night mode on
-                    view.setBackgroundColor(getResources().getColor(R.color.nightBackground));
-                    ViewGroup viewGroup = (ViewGroup)view;
-                    redText(viewGroup);
-                }
-                else {view.setBackgroundColor(getResources().getColor(R.color.dayBackground));
-                }
-                return true;}
-        });  */
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                if ((Boolean) o) getActivity().getApplication().setTheme(R.style.AppTheme_Night);
+                else getActivity().getApplication().setTheme(R.style.AppTheme);
+                TaskStackBuilder.create(getActivity())
+                        .addNextIntent(new Intent(getActivity(), MainActivity.class))
+                        .addNextIntent(getActivity().getIntent())
+                        .startActivities();
+                return true;
+            }
+        });
 
         setLocationPrefListeners();  // sets Location 1 - 5 onChangePreferenceListeners
 
