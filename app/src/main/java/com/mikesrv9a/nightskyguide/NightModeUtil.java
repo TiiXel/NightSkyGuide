@@ -8,8 +8,12 @@ import android.view.Menu;
 
 public class NightModeUtil {
 
+    static public boolean isEnabled(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("night_mode", false);
+    }
+
     static public void colorizeOptionMenu(Context context, Menu menu) {
-        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("night_mode", false)) {
+        if (isEnabled(context)) {
             for (int count = 0; count < menu.size(); count++) {
                 Drawable drawable = menu.getItem(count).getIcon();
                 if (drawable != null) {

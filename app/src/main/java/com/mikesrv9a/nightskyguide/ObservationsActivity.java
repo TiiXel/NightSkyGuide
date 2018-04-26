@@ -19,6 +19,7 @@ public class ObservationsActivity extends AppCompatActivity implements Observati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_observations);
+        if (NightModeUtil.isEnabled(this)) setTheme(R.style.AppTheme_Night);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
