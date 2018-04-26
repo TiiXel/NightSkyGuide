@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -156,10 +158,10 @@ public class DetailFragment extends Fragment {
             Bitmap bm = loadConstImage(constName);   // display constellation .gif on detail screen
             constImageView.setImageBitmap(bm);
 
-            /*
-            // Change constellation image to night mode version
-            int colorCode = Color.argb(255,255,0,0);  // transparency and red = 255, green and blue = 0
-            constImageView.setColorFilter(colorCode, PorterDuff.Mode.MULTIPLY);  */
+            if(PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("night_mode", false)) {
+                int colorCode = Color.argb(255, 255, 0, 0);  // transparency and red = 255, green and blue = 0
+                constImageView.setColorFilter(colorCode, PorterDuff.Mode.MULTIPLY);
+            }
         }
 
         //setNightMode(view);
