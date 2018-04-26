@@ -1,26 +1,23 @@
 package com.mikesrv9a.nightskyguide;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.content.Context;
-import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Toast;
-
 import com.opencsv.CSVWriter;
 
 import java.io.File;
@@ -182,6 +179,16 @@ public class ObservationsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_observations_menu, menu);
+
+        if (PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("night_mode", false)) {
+            for (int count = 0; count < menu.size(); count++) {
+                Drawable drawable = menu.getItem(count).getIcon();
+                if (drawable != null) {
+                    drawable.mutate();
+                    drawable.setColorFilter(getResources().getColor(R.color.colorNightAccent), PorterDuff.Mode.MULTIPLY);
+                }
+            }
+        }
     }
 
     // display selected menu item

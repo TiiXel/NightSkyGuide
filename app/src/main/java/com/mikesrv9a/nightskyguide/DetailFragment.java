@@ -7,24 +7,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.internal.NavigationMenu;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.view.*;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
+import com.github.chrisbanes.photoview.PhotoView;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.InputStream;
 import java.text.DecimalFormat;
@@ -33,12 +25,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
-
-import com.github.chrisbanes.photoview.PhotoView;
-
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 public class DetailFragment extends Fragment {
 
@@ -218,14 +204,7 @@ public class DetailFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_details_menu, menu);
 
-        /* Night mode work in progress
-        for(int count = 0; count < menu.size(); count++) {
-            Drawable drawable = menu.getItem(count).getIcon();
-            if(drawable != null) {
-                drawable.mutate();
-                drawable.setColorFilter(Color.argb(255,255,0,0),PorterDuff.Mode.MULTIPLY);
-            }
-        } */
+        NightModeUtil.colorizeOptionMenu(getContext(), menu);
     }
 
     // display selected menu item

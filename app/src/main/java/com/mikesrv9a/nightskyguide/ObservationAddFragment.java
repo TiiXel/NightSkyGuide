@@ -14,25 +14,19 @@ import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import java.text.DecimalFormat;
-import java.util.Locale;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import java.text.DecimalFormat;
+import java.util.Locale;
 
 
 public class ObservationAddFragment extends Fragment  {
@@ -260,6 +254,8 @@ public class ObservationAddFragment extends Fragment  {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_add_edit_observ_menu, menu);
+
+        NightModeUtil.colorizeOptionMenu(getContext(), menu);
     }
 
     // display selected menu item
