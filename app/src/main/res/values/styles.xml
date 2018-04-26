@@ -2,14 +2,37 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="themedColorPrimary">@color/colorPrimary</item>
+        <item name="themedColorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="themedColorAccent">@color/colorAccent</item>
+
+        <item name="colorPrimary">?themedColorPrimary</item>
+        <item name="colorPrimaryDark">?themedColorPrimaryDark</item>
+        <item name="colorAccent">?themedColorAccent</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.Night" parent="AppTheme">
+        <item name="themedColorPrimary">@color/colorNightPrimary</item>
+        <item name="themedColorPrimaryDark">@color/colorNightPrimaryDark</item>
+        <item name="themedColorAccent">@color/colorNightAccent</item>
+        <item name="themedColorForeground">@color/colorNightForeground</item>
+        <item name="themedColorForegroundSecondary">@color/colorNightForeground</item>
+        <item name="themedColorBackground">@color/colorNightBackground</item>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+        <item name="android:windowBackground">?themedColorBackground</item>
+        <item name="android:textColor">?themedColorForeground</item>
+        <item name="android:textColorPrimary">?themedColorForeground</item>
+        <item name="android:textColorSecondary">?themedColorForegroundSecondary</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">?themedColorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat">
+        <item name="android:textColorPrimary">?themedColorForeground</item>
+        <item name="android:textColorSecondary">?themedColorForegroundSecondary</item>
+    </style>
 
     <style name="DSObjectLabelTextView">
         <item name="android:layout_width">wrap_content</item>
@@ -68,5 +91,4 @@
         <item name="colorPrimary">@color/nightBackground</item>
         <item name="colorPrimaryDark">@color/nightAccent</item>
     </style>  -->
-
 </resources>
